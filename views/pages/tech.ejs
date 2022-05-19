@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("../partials/head", {"title": "Technology"}); %>
+</head>
+<body>
+  <header>
+    <%- include("../partials/header", {currentPage: "Technology"}); %>
+  </header>
+  <main>
+    <div class="jumbotron">
+      <div class="container">
+      
+        <div class="row align-items-center">
+          <div class="col-md-3">
+            <a href="/vs/img/bitman.png">
+              <img class="img-fluid" src="/vs/img/bitman.png">
+            </a>
+          </div>
+          <div class="col-md-9">
+            <h1 class="display-3">BitMan</h1>
+            <h2 class="display-5">Bitstream configuration extractor for Xilinx FPGAs</h2>
+            <p>This tool can create/extract/edit Xilinx 7Series/UltraScale(+) bitstream files.</p>
+            <a href="https://github.com/khoapham/bitman">GitHub</a>
+          </div>
+
+        </div>
+        
+        <hr>
+        
+        <div class="row align-items-center">
+          <div class="col-md-9">
+            <h2>Features</h2>
+            <ul>
+              <li>Parses/Generates the bitstreams for Xilinx 7Series, UltraScale and UltraScale+ Chips</li>
+              <li>Performs simple bitmap operations such as copying/moving/clearing.</li>
+              <li>Performs simple boolean operations like OR, AND, XOR, NOR</li>
+              <ul>
+                <li>OR: merging bitstream contents</li>
+                <li>AND: cutting bitstream contents out</li>
+                <li>XOR: finding bitstream differences</li>
+              </ul>
+              <li>Can read/write partial bitstream configurations.</li>
+            </ul>
+          </div>
+          
+
+        </div>
+        
+      </div>
+    </div>
+    
+    <div class="container">
+    
+      <div class="row align-items-center">
+        <div class="col-md-9">
+          <h1 class="display-3">Carpenter LUT</h1>
+          <h2 class="display-5">Configuration decoder for Xilinx FPGAs</h2>
+          <p>This tool can parse Xilinx FPGA configuration data, and build feature lists and implementation graphs.</p>
+        </div>
+        <div class="col-md-3">
+          <a href="/vs/img/carpenterlut.png">
+            <img class="img-fluid" src="/vs/img/carpenterlut.png">
+          </a>
+        </div>
+      </div>
+      
+      <hr>
+      
+      <div class="row align-items-center">
+        <div class="col-md-9">
+          <h2>Features</h2>
+          <ul>
+            <li>Converts bitstreams to feature lists and implementation graphs</li>
+            <li>Allows direct access to PIPs, LUTs, and primitive properties</li>
+            <li>Loads/Stores bitstreams via bitman shared dynamic library</li>
+            <li>Loads/Stores feature lists from/to FASM files</li>
+            <li>Loads/Stores implementation graphs from/to JSON files</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="jumbotron">
+      <div class="container">
+      
+        <div class="row align-items-center">
+          <div class="col-md-3">
+            <a href="/vs/img/virusscanner.png">
+              <img class="img-fluid" src="/vs/img/virusscanner.png">
+            </a>
+          </div>
+          <div class="col-md-9">
+            <h1 class="display-3">FPGA Virus Scanner</h1>
+            <h2 class="display-5">Malicious circuit detector for FPGA designs</h2>
+            <p>This tool looks for suspicuous constructs in FPGA design implementations</p>
+            <a href="https://github.com/FPGA-Research-Manchester/FPGAVirusScanner">GitHub</a>
+          </div>
+
+        </div>
+        
+        <hr>
+        
+        <div class="row align-items-center">
+          <div class="col-md-9">
+            <h2>Features</h2>
+            <ul>
+              <li>Standardised scanner for FPGA designs</li>
+              <li>Detects several important FPGA security concerns:
+              <ul>
+                <li>Oscillators (naive, carry-chain-based, dsp-based, latch-based, glitch-based, primitive-based)
+                <li>Short circuits and other invalid configuration encodings</li>
+                <li>Glitch amplification (e.g., using XOR gates to create fast toggling signals)</li>
+                <li>High fanout nets (in combination with glitch amplification)</li>
+                <li>Module bounding boxes (in PR mode)</li>
+                <li>Prohibited resources (LUTs, I/O pins, wires, etc.)</li>
+              </ul>
+              </li>
+              <li>Generates standard report, with accumulated danger score.</li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+
+  </main>
+  <footer>
+      <%- include("../partials/footer"); %>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("../partials/head", {"title": "New Scan"}) %>
+</head>
+<body>
+  <header>
+    <%- include("../partials/header", {currentPage: "New Scan"}) %>
+  </header>
+  <main>
+    <div class="container" style="padding-top: 1rem;">
+      <h4>Supported chips:</h4>
+      <ul>
+        <li><b>ZU3EG:</b> Small FPGA SoC, on the popular Ultra96 board from Avnet.</li>
+        <li><b>ZU9EG:</b> Large FGPA SoC, powers the ZCU102 development board from Xilinx.</li>
+        <!-- <li><b>VU3P:</b> Large FPGA chip, used in the Xilinx Alveo boards.</li> -->
+        <li><b>VU9P:</b> Very large multi-die FPGA chip, on the Xilinx U200 Alveo boards and Amazon F1 instances.</li>
+      <ul>
+    </div>
+    <div class="container" style="padding-top: 1rem;">
+      <h2>Upload a new bitstream and start a new scan job.</h2>
+      <form action="/vs/scan/new" method="post" enctype="multipart/form-data" id="scanform">
+
+        <div class="form-group row">
+          <label for="jobnameinput" class="col-sm-4 col-form-label">Name of the scan job:</label>
+          <input class="form-control col-sm-8" type="text" name="jobname" id="jobnameinput" placeholder="Name (Leave blank to use bitstream name as job name)"/>
+        </div>
+
+        <div class="form-group row">
+          <label for="bitstreaminput" class="col-sm-4 col-form-label">Upload bitstream file</label>
+          <input class="form-control-file col-sm-8" type="file" name="bitstream" id="bitstreaminput" required/>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Use Python or C++ scanner implementation</label>
+          <div class="col-sm-8">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary">
+                <input type="radio" name="lang" value="python" id="python" autocomplete="off"> Python
+              </label>
+              <label class="btn btn-secondary active">
+                <input type="radio" name="lang" value="cpp" id="cpp" autocomplete="off" checked> C++
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Show scan results (and bitstream) in the public scan list</label>
+          <div class="col-sm-8">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="public" value="true" id="public" autocomplete="off" checked> Public
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="private" value="false" id="private" autocomplete="off"> Unlisted
+              </label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%">Upload and Scan</button>
+        
+      </form>
+      
+      <script>
+        let selected = false
+        $(":file").on("change", () => {
+          let filename = $(":file").val().split('\\').pop();
+          let jobname = $("#jobnameinput")
+          if (jobname.val() == "")
+            jobname.val(filename)
+          selected = true
+        })
+        $("#scanform").submit(function(event) {
+          if (!selected) {
+            alert("Please choose a file to upload")
+            event.preventDefault()
+          }
+        });
+      </script>
+      <hr>
+    </div> <!-- /container -->
+  </main>
+  <footer>
+      <%- include("../partials/footer") %>
+  </footer>
+</body>
+</html>

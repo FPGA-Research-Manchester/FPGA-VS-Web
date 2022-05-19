@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("../partials/head", {"title": "About"}); %>
+</head>
+<body>
+  <header>
+    <%- include("../partials/header", {currentPage: "About"}); %>
+  </header>
+  <main>
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-3">FPGA Virus Scanner</h1>
+        <h2 class="display-4">The University of Manchester</h2>
+        <h3 class="display-5">Advanced Processor Technologies</h3>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Online FPGA Virus Scanner</h2>
+      <p>This service allows users to scan their bitstreams for malicious designs using the UoM FPGA Virus Scanner.</p>
+      <p>Users may upload their designs to this website, where they will be scanned, and the scan report returned.</p>
+      <p>The service will also allow users to download a FASM decoding, or a JSON design implementation of the design (if compiled using FOS flow).</p>
+    </div>
+
+
+  </main>
+  <footer>
+      <%- include("../partials/footer"); %>
+  </footer>
+</body>
+</html>

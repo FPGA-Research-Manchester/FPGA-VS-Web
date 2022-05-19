@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("../partials/head", {"title": "Scans"}); %>
+</head>
+<body>
+  <header>
+    <%- include("../partials/header", {currentPage: "Scans"}); %>
+  </header>
+  <main>
+          
+    <div class="container" style="padding-top: 1rem;">
+      <h2>List of all scans</h2>
+        <div class="list-group">
+          <%
+            for (bitid of repo.getBits()) {
+              let bit = repo.getBit(bitid);
+              if (!bit.ispublic)
+                continue;
+              let job = bit.getJob("job_vscan");
+          %>
+            <a href="/vs/scan/<%= bit.key %>" class="list-group-item list-group-item-action">
+              <% if (job.state == "waiting") { %>
+                <i class="fas fa-clock"></i> Waiting: <%= bit.name %>  (<%= job.scan_type %>)
+              <% } else if (job.state == "running") { %>
+                <i class="fas fa-running"></i> Running: <%= bit.name %>  (<%= job.scan_type %>)
+              <% } else if (job.state == "done") { %>
+                <i class="fas fa-check"></i> Done: <%= bit.name %> [score: <%= job.results.score %>] (<%= job.scan_type %>)
+              <% } else if (job.state == "error") { %>
+                <i class="fas fa-exclamation"></i> Error: <%= bit.name %>  (<%= job.scan_type %>)
+              <% } else { %>
+                <i class="fas fa-question"></i> Unknown state: <%= bit.name %>  (<%= job.scan_type %>)
+              <% } %>
+            </a>
+          <% } %>
+        </div>
+      <hr>
+    </div> <!-- /container -->
+  </main>
+  <footer>
+      <%- include("../partials/footer"); %>
+  </footer>
+</body>
+</html>

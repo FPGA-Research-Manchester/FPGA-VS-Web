@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("../partials/head", {"title": "Home"}); %>
+</head>
+<body>
+  <header>
+    <%- include("../partials/header", {currentPage: "Home"}); %>
+  </header>
+  <main>
+    <div class="jumbotron">
+      <div class="container">
+      
+        <div class="row align-items-center">
+                  <div class="col-md-3">
+            <img class="img-fluid" src="/vs/img/logo.png">
+          </div>
+          <div class="col-md-9">
+            <h1 class="display-3">FPGADefender</h1>
+            <h2 class="display-5">Virus Scanning for FPGAs</h2>
+            <p>This website allows users to submit FPGA bitstreams for virus scanning.</p>
+          </div>
+
+        </div>
+        
+        <hr>
+        
+        <div class="row align-items-center">
+          <div class="col-md-9">
+            <h2>So, where is the problem?</h2>
+            <p>A malicious design may draw extensive power (can be theoretically KWs of power).</p>
+            <ul>
+              <li>We demonstrated crashing of AWS F1 instances through power-hammering.</li>
+              <li>Alveo U200 cards pass out at 350W.</li>
+              <li>Tiny system like Ultra96 crash at ~10W.</li>
+            </ul>
+            <p>Also bitstreams maybe compromised.</p>
+          </div>
+          
+          <div class="col-md-3">
+            <p><a class="btn btn-primary btn-lg" href="/vs/scan/new" role="button">
+              <i class="fas fa-search"></i> Scan a Bitstream!
+            </a></p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <div class="container">
+
+    </div><!-- /container -->
+          
+    <div class="container">
+      <h2>To give highest level of confidence</h2>
+      <h4>FPGADefender scans for:</h4>
+      <ul>
+        <li>Oscillators:
+          <ul>
+            <li>Ring oscillators</li>
+            <li>Carry-chain oscillators</li>
+            <li>DSP block ring oscillators</li>
+            <li>Latch-based oscillators</li>
+            <li>Oscillators based on race conditions and asyncronous resets</li>
+            <li>Oscillators using glitch amplification</li>
+            <li>Oscillators implemented in I/O tiles and others</li>
+          </ul>
+        </li>
+        <li>Short circuits and other invalid configuration encodings</li>
+        <li>Glitch amplification (e.g., using XOR gates to create fast toggling signals)</li>
+        <li>High fanout nets (in combination with glitch amplification)</li>
+        <li>Module bounding boxes (in PR mode)</li>
+        <li>Prohibited resources (LUTs, I/O pins, clock resources, chip management units, wires, etc.)</li>
+      </ul>
+      <p>Information on the virus scanner can be found on the <a href="https://github.com/FPGA-Research-Manchester/FPGAVirusScanner">github</a> page.</p>
+      <hr>
+    </div> <!-- /container -->
+
+    <div class="jumbotron">
+      <div class="container">
+        <h2>Our work is kindly supported by:</h2>
+        <p><img style="width: 100px;" src="/pics/ncsc_logo.png" /> The UK National Cyber Security Centre through the project rFAS (grant agreement 4212204/RFA 1597)</p>
+        <p><img style="width: 100px;" src="/pics/amd_xilinx_logo.png" /> We thank AMD/Xilinx for their generous support</p>
+      </div>
+    </div>
+
+  </main>
+  <footer>
+      <%- include("../partials/footer"); %>
+  </footer>
+</body>
+</html>

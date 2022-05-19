@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("../partials/head", {"title": "Scan: " + bitstream.name}) %>
+</head>
+<body>
+  <header>
+    <%- include("../partials/header", {currentPage: ""}) %>
+  </header>
+  <main>
+
+    <div class="container" style="padding-top: 1rem;">
+
+      <% if (job.state == "waiting") { %>
+        <h2>Scan Job: <%= bitstream.name %> (<%= job.scan_type %>, <%= bitstream.ispublic ? "Public" : "Private" %>)</h2>
+        <h3>Job is waiting to be run (<a href="/vs/scan/<%= id %>">Refresh</a>)</h3>
+      <% } else if (job.state == "running") { %>
+        <h2>Scan Job: <%= bitstream.name %> (<%= job.scan_type %>, <%= bitstream.ispublic ? "Public" : "Private" %>)</h2>
+        <h3>Job is running (<a href="/vs/scan/<%= id %>">Refresh</a>) (since <%= job.start_date.toString() %>)</h3>
+      <% } else if (job.state == "error") { %>
+        <h2>Scan Job: <%= bitstream.name %> (<%= job.scan_type %>, <%= bitstream.ispublic ? "Public" : "Private" %>)</h2>
+        <h3>Job crashed (at <%= job.end_date.toString() %>)</h3>
+        <textarea style="width: 100%"><%= JSON.stringify(job, null, 2) %></textarea>
+      <% } else if (job.state == "done") { %>
+        <div class="row">
+          <div class="col-md-8">
+            <h2>Scan Job: <%= bitstream.name %> (<%= job.scan_type %>, <%= bitstream.ispublic ? "Public" : "Private" %>)</h2>
+            <br>
+            <h3>Job is complete, score is <%= job.results.score %> </h3>
+            <br>
+            <h4>Job took <%= (job.end_date - job.start_date) / 1000 %>s</h4>
+            <ul>
+              <li><a href="/vs/scan/<%= id %>/res/bit">Download Bitstream</a></li>
+              <% if (bitstream.getJob("job_check").results) { %>
+                <li>FOS Shell detected (Decompile enabled)
+                <ul>
+                <% if (bitstream.getJob("job_fasm").state == "done") { %>
+                  <li><a href="/vs/scan/<%= id %>/res/fasm">Download Bitstream as FASM</a></li>
+                <% } %>
+                
+                <% if (bitstream.getJob("job_json").state == "done") { %>
+                  <li><a href="/vs/scan/<%= id %>/res/json">Download Bitstream as JSON</a></li>
+                <% } %>
+                </ul>
+                </li>
+              <% } else { %>
+                <li>FOS Shell not detected (Decompile disabled)</li>
+              <% } %>
+              <li><a href="/vs/scan/<%= id %>/json">Download Scan Report as JSON</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4"><img class="img-thumbnail" src="/vs/scan/<%= id %>/img/util"></div>
+        </div>
+        
+        <hr>
+        <%
+          for (const scantype in job.results.scans) {
+            const scan = job.results.scans[scantype];
+        %>
+        <h4><%= scantype %>: <%= scan.score %></h4>
+        
+          <% if (scan.type == "CombinatorialLoopDetector") { %>
+            <ul>
+            <% for (let i = 1; i < scan.data.length; i++) { %>
+              <li><div>Loop: <%= scan.data[i] %></div></li>
+            <% } %> 
+            </ul>
+
+          <% } else if (scan.type == "AntennaDetector") { %>
+            <% for (let i = 1; i < scan.data.length; i++) { %>
+              <div>Dangling Port: <%= scan.data[i] %></div>
+            <% } %> 
+
+          <% } else if (scan.type == "FanOutDetector") { %>
+            <% for (let i = 0; i < scan.data.length; i++) { %>
+              <div>Fanout: <%= scan.data[i] %></div>
+            <% } %> 
+
+          <% } else if (scan.type == "GlitchPowerEstimator" && job.scan_type == "cpp") { %>
+            <div class="row">
+              <div class="col-md-8"></div>
+              <div class="col-md-4"><img class="img-thumbnail" src="/vs/scan/<%= id %>/img/glitch"></div>
+            </div>
+          <% } %>
+
+          <hr>
+        <%  } %>
+        
+        <textarea style="width: 100%"><%= JSON.stringify(job.results, null, 2) %></textarea>
+      <% } else { %>
+        <h3>Error unknown state "<%= job.state %>" :(</h3>
+      <% } %>
+      <hr>
+    </div> <!-- /container -->
+  </main>
+  <footer>
+      <%- include("../partials/footer") %>
+  </footer>
+</body>
+</html>

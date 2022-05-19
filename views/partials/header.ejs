@@ -1,0 +1,28 @@
+<%
+  let headeritems = [
+    {name: "Home", url: "/vs/"},
+    {name: "Scans", url: "/vs/scan"}, 
+    {name: "New Scan", url: "/vs/scan/new"},
+    {name: "Technology", url: "/vs/tech"},
+    {name: "Team", url: "/vs/team"},
+    {name: "About", url: "/vs/about"},
+  ]
+%>
+
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  
+  <a class="navbar-brand" href="#"><i class="fas fa-shield-virus"></i> FPGADefender</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <% for (const header of headeritems) { %>
+        <li class="nav-item<% if (header.name == currentPage) { %> active<% } %>">
+          <a class="nav-link" href="<%= header.url %>"><%= header.name %></a>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+</nav>

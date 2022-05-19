@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("../partials/head", {"title": "Team"}); %>
+</head>
+<body>
+  <header>
+    <%- include("../partials/header", {currentPage: "Team"}); %>
+  </header>
+  <main>
+
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row align-items-center">
+          <h1>The Team</h1>
+          <a href="/vs/img/team.jpg">
+            <img class="img-fluid" src="/vs/img/team.jpg">
+          </a>
+        </div>
+        <br>
+        <p><b>Joe Powell:</b> High-perfomance and high quality FPGA bitstream virus scanning as well as writing the Carpenter bitstream API and developing the online scanner and website</p>
+        <p><b>Khoa Pham:</b> Author of the BitMan bitstream parser and API</p>
+        <p><b>Tuan La:</b> Building a detailed power model for recent Xilinx FPGAs and exploring the thread potential (including attacks running on AWS F1 instances)</p>
+        <p><b>Kaspar Matas:</b> Wrote the first version of FPGADefender and included a scan for a rough power estimate through glitch amplification</p>
+        <p><b>Samuel Leonard:</b> Wrote some helper functions, like computing to which inputs a (fracturable) LUT is sensitive to.</p>
+        <p><b>Anuj Vaishnav:</b> Developed the first version of FOS, the FPGA Operating System</p>
+        <p><b>Shaden Alismail:</b> Adds improved scheduling policies and security features to FOS</p>
+        <p><b>Kristiyan Manev:</b> Helped with supporting multi-CLA (2.5D stacked) FPGAs</p>
+        <p><b>Jack Westwood:</b> Developed the AES hardware Trojan insertion tool working entirely on a bitstream</p>
+        <p><b>Bardia Babaei:</b> Characterizing effects due to FPGA viruses in production systems</p>
+        <p><b>Shaza Zeitouni & Ahmad-Reza Sadeghi:</b> Running FPGADefender in an SGX TEE for scanning and signing bitstreams</p>
+        <p><b>Jo Vliegen & Nele Mentens (KU Leuven, BE):</b> FPGA Trusted Execution Environment (allows users configuring a cloud FPGA with an encrypted bitstream that is signed and protected the FPGADefender)</p>
+        <p><b>Dirk Koch:</b> A tiny little bit of everything</p>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <h2>Our work is kindly supported by</h2>
+      <p><img style="width: 100px;" src="/pics/ncsc_logo.png" /> The UK National Cyber Security Centre through the project rFAS (grant agreement 4212204/RFA 1597)</p>
+      <p><img style="width: 100px;" src="/pics/amd_xilinx_logo.png" /> We thank AMD/Xilinx for their generous support</p>
+    </div>
+
+
+  </main>
+  <footer>
+      <%- include("../partials/footer"); %>
+  </footer>
+</body>
+</html>
