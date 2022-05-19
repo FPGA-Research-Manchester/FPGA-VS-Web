@@ -1,4 +1,5 @@
 # FPGA Virus Scanner Website
+### The [FPGA Virus Scanner website](https://fpga.cs.manchester.ac.uk/vs/) is online right now.
 
 The FPGA Virus Scanner web application is an online interface to the FPGA Virus Scanners written by the UoM FPGA group.
 
@@ -35,4 +36,5 @@ The main virus scanning engine takes the implemented FPGA graphs and traverses t
 
 ## Sponsors
 <img src='/public/img/ncsc_logo.png' width='200px' /> The UK National Cyber Security Centre through the project rFAS (grant agreement 4212204/RFA 1597)
+
 <img src='/public/img/amd_xilinx_logo.png' width='200px' /> We thank AMD/Xilinx for their generous support
